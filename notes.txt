@@ -1,0 +1,147 @@
+Stranger's Things Steps:
+
+
+Notes:
+    -DO ONE THING AND THEN CONSOLE LOG IT. DON'T KEEP DOING THIS TO YOURSELF CJ!
+
+    -useState: This is a hook that will track state in a component.
+
+        const [state, setState] = useState([])
+    
+    -state is a constant variable and setState is a function we will use to update (WITHOUT MUTATING) state. In useState we have set the initial state
+    to an empty array because we intend to pass arrays into this function.
+
+    -useEffect: This is a hook that will be used mostly for calling on functions to set an initial state (render)
+    when the page is first loaded. Recently I have seen it used for fetching data from an API for an initial display
+    on a webpage. ()
+
+        useEffect(() => {
+            const someConst = async () => {
+                / variables usually for getting a response and then using .json() to read and translate the data we fetched
+                / for this example we will use response and result will be response.json()
+
+
+               setState(result)
+            }
+        }, []) <-- empty array at the end is default to prevent looping
+
+    -useParams: This is a hook that will return an object of key/value pairs of URL parameters when using Routes
+
+        function BlogPost() {
+            let { slug } = useParams();
+            return <div>Now showing post {slug}</div>;
+            }
+
+            ReactDOM.render(
+            <Router>
+                <Switch>
+                <Route exact path="/">
+                    <HomePage />
+                </Route>
+                <Route path="/blog/:slug">
+                    <BlogPost />
+                </Route>
+                </Switch>
+            </Router>,
+            node
+        );
+
+    -UseNavigate 
+
+        function SignupForm() {
+            let navigate = useNavigate();
+
+            async function handleSubmit(event) {
+                event.preventDefault();
+                await submitForm(event.target);
+                navigate("../success", { replace: true });
+            }
+
+            return <form onSubmit={handleSubmit}>{/* ... */}</form>;
+        }
+
+    -Read (GET) steps [to update state with useEffect]: 
+        -create a constant variable that is an asynchronous function | const fetchItems = async () = {}
+        -create another constant as a response that fetches and awaits data from an API | const response = await fetch('https://someapi.com/api')
+        -create another constant (that waits) as a result of the data that needs to be translated with JSON | const result = await response.json()
+        -finally update our state with our updater function | setItems(result)
+
+    -Create (POST) steps:
+        -sometimes occurs on action like onClick or onSubmit, etc. - in which case we will have to use preventDefault to maintain our SPA
+        -create a constant variable that fetches and awaits data from an API
+        -fetch also takes in an optional second argument, an object with some options - such as POST (see fetch MDN)
+
+        const CreatePost = ({items, setItems}) => {
+            const [title, setTitle] = useState([])
+            const [body, setBody] = useState([])
+
+            const handleSubmit = async (event) => {
+                event.preventDefault()
+                const response = await fetch('https://someapi.com/api', 
+                    {
+                    method : 'POST',
+                    headers: {
+                        'Content-type': 'Application/json',         <- Needs to be sent over when making a POST request
+                    },
+                    body: JSON.stringify({
+                        title,
+                        body,
+                    })
+                })
+                const data = await response.json()
+                setItems([data, ...items])
+                setTitle('')  <- resets title to unpopulate the form value after submitting
+                setBody('')  <- ^^
+            }
+        }
+
+    NOTE: This example is using props passed in from an index.js file where the Component is rendered
+
+    -Update (PATCH) steps: 
+        -using the example of adding an edit button at the bottom of posts on a page. each post has a unique id that will be passed to
+        the button to correctly edit (update) the post
+        -fetch data like normal but add a passed in postId and attach to the end of the URL | const response = await fetch(`https://someapi.com/api/${postId}`)
+        -this time instead of using { method: 'POST'} we use { method: 'PATCH'}, headers is the same | we are saying that we are sending over the content type of JSON
+        -this body line is the same as the POST method
+        -now we need to figure out WHAT we are updating. | example below (pretend we have lines 37-53 but instead have the PATCH method)
+
+                const data = await response.json()
+                if(data && data.title) {
+                    const newPosts = posts.map(post => {
+                        if(post.id === postId) {
+                            return data
+                        } else {
+                            return post;
+                        }
+                    })
+                    setPosts(newPosts)
+                    setTitle('')
+                    setBody('')
+                    setPostId(null)
+                }
+
+        BREAKDOWN:
+            Line 72: if we have gotten a good response back and that response has a title we can assume the rest is the same
+            Line 73: we are mapping over the array of posts & creating a new posts array
+            Line 74: if the post id is strictly equal to the post id (postId) that we passed in
+            Line 75: we want to return an updated version
+            Lines 76 & 77: return the original post if it does not match
+            Line 80: returns a new array of our posts including the updated post
+            Line 81 & 82: resets the title and body fields to be unpopulated
+            Line 83: We have to reset the PostId so that we can populate it correctly next time we use the updater component
+
+    -DELETE steps: 
+        -make a new button next to the edit button except this one has an event handler (async function) "handleDelete" is common
+        -in our function we can use postIdToDelete as our parameter name in this case and append it onto our API URL just like we did with postId above
+        -we will fetch again but this time with the delete method
+        -example below on the next parts
+
+            const data = await response.json()
+                if(data) {
+                    const newPosts = posts.filter(post => post.id !== postIdToDelete) {
+                    setPosts(newPosts)
+                }
+        
+        BREAKDOWN: 
+        Line 105: basically if there is data, which we know there will be
+        Line 106: filter through all of our new posts and delete the one that matches the button by ID
