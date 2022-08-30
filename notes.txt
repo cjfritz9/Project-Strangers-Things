@@ -2,7 +2,7 @@ Stranger's Things Steps:
 
 
 Notes:
-    -DO ONE THING AND THEN CONSOLE LOG IT. DON'T KEEP DOING THIS TO YOURSELF CJ. 
+    -DO ONE THING AND THEN CONSOLE LOG IT. DON'T KEEP DOING THIS TO YOURSELF CJ!
 
     -useState: This is a hook that will track state in a component.
 
@@ -24,6 +24,41 @@ Notes:
                setState(result)
             }
         }, []) <-- empty array at the end is default to prevent looping
+
+    -useParams: This is a hook that will return an object of key/value pairs of URL parameters when using Routes
+
+        function BlogPost() {
+            let { slug } = useParams();
+            return <div>Now showing post {slug}</div>;
+            }
+
+            ReactDOM.render(
+            <Router>
+                <Switch>
+                <Route exact path="/">
+                    <HomePage />
+                </Route>
+                <Route path="/blog/:slug">
+                    <BlogPost />
+                </Route>
+                </Switch>
+            </Router>,
+            node
+        );
+
+    -UseNavigate 
+
+        function SignupForm() {
+            let navigate = useNavigate();
+
+            async function handleSubmit(event) {
+                event.preventDefault();
+                await submitForm(event.target);
+                navigate("../success", { replace: true });
+            }
+
+            return <form onSubmit={handleSubmit}>{/* ... */}</form>;
+        }
 
     -Read (GET) steps [to update state with useEffect]: 
         -create a constant variable that is an asynchronous function | const fetchItems = async () = {}
@@ -103,10 +138,10 @@ Notes:
 
             const data = await response.json()
                 if(data) {
-                    const newPosts = posts.filter(post => post.id !== postIdToDelete {
+                    const newPosts = posts.filter(post => post.id !== postIdToDelete) {
                     setPosts(newPosts)
                 }
         
         BREAKDOWN: 
         Line 105: basically if there is data, which we know there will be
-        Line 106: filter through all of our new posts and delete
+        Line 106: filter through all of our new posts and delete the one that matches the button by ID

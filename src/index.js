@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { createRoot } from 'react-dom/client';
+import { Header, Login, Messages, Posts } from './components'
 
 const App = () => {
     return(
         <div>
-            <App /> 
+             <Header />
+             <Search />
+             <Posts />
         </div>
     )
 }
