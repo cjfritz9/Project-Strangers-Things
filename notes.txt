@@ -1,5 +1,7 @@
 Stranger's Things Steps:
-
+    -set up contstants for URLs
+    -familiarize yourself with object keys/values in the API returns
+    -show posts
 
 Notes:
     -DO ONE THING AND THEN CONSOLE LOG IT. DON'T KEEP DOING THIS TO YOURSELF CJ!
@@ -81,7 +83,7 @@ Notes:
                     {
                     method : 'POST',
                     headers: {
-                        'Content-type': 'Application/json',         <- Needs to be sent over when making a POST request
+                        'Content-type': 'Application/json'         <- Needs to be sent over when making a POST request
                     },
                     body: JSON.stringify({
                         title,
@@ -145,3 +147,13 @@ Notes:
         BREAKDOWN: 
         Line 105: basically if there is data, which we know there will be
         Line 106: filter through all of our new posts and delete the one that matches the button by ID
+
+
+
+        Questions:
+        Pushing to github from a template not working
+        Good names for api functions that POST 
+
+        git branch to see branches
+
+        merging: 
