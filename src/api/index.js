@@ -5,7 +5,7 @@ export const fetchAllPosts = async () => {
         const response = await fetch (`${BASE_URL}/posts`)
         const result = await response.json()
 
-        console.log(fetchAllPosts())
+        console.log(result)
         if (result.error) throw result.error
         // return result.data.posts
     } catch(err) {
@@ -13,8 +13,6 @@ export const fetchAllPosts = async () => {
     }
 }
 
-export const handleRegister = async () => {
 
 
-}
 

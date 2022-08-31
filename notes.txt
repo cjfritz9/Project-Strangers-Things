@@ -1,11 +1,8 @@
 Stranger's Things Steps:
-<<<<<<< HEAD
 
-=======
     -set up contstants for URLs
     -familiarize yourself with object keys/values in the API returns
     -show posts
->>>>>>> master
 
 Notes:
     -DO ONE THING AND THEN CONSOLE LOG IT. DON'T KEEP DOING THIS TO YOURSELF CJ!
@@ -87,11 +84,8 @@ Notes:
                     {
                     method : 'POST',
                     headers: {
-<<<<<<< HEAD
                         'Content-type': 'Application/json',         <- Needs to be sent over when making a POST request
-=======
                         'Content-type': 'Application/json'         <- Needs to be sent over when making a POST request
->>>>>>> master
                     },
                     body: JSON.stringify({
                         title,
@@ -154,9 +148,7 @@ Notes:
         
         BREAKDOWN: 
         Line 105: basically if there is data, which we know there will be
-<<<<<<< HEAD
         Line 106: filter through all of our new posts and delete the one that matches the button by ID
-=======
         Line 106: filter through all of our new posts and delete the one that matches the button by ID
 
 
@@ -168,4 +160,3 @@ Notes:
         git branch to see branches
 
         merging: 
->>>>>>> master

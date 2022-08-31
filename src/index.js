@@ -6,14 +6,13 @@ import { Header, Login, Messages, Posts } from './components'
 import { fetchAllPosts } from './api';
 
 const App = () => {
-    const [title, setTitle] = ([])
-    const [body, setBody] = ([])
+
 
     return(
         <div>
              <Header />
              {/* <Search /> */}
-             {/* <Posts title={title} body={body} /> */}
+             {/* <Posts /> */}
              <Login />
         </div>
     )
