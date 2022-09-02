@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllPosts } from "../api";
+import { BASE_URL } from "../api";
 
 export const Posts = () => {
     const [postsList, setPostsList] = useState([])
@@ -7,21 +7,33 @@ export const Posts = () => {
     const [body, setBody] = useState([])
 
     useEffect(() => {
-        const fetchAllPosts = async () => {
-            try {
-                const response = await fetch (`${BASE_URL}/posts`)
-                const result = await response.json()
-
-                console.log(result)
-            } catch(err) {
-                console.error('Error fetching post data: ', err)
-            }
+        const getPosts = async() => {
+            await fetchAllPosts()
         }
+        getPosts()
     }, [])
 
+    const fetchAllPosts = async () => {
+        try {
+            const response = await fetch (`${BASE_URL}/posts`)
+            const postsObj = await response.json()
+            const postsArr =  postsObj.data.posts
+            setPostsList(postsArr)
+        } catch(err) {
+            console.error('Error fetching post data: ', err)
+        }
+    }
     return (
-        <h1></h1>
+        <div>{
+            postsList.map((post, i) => {
+                return (
+                    <div>
+                        <h1 key={i}>{post.title}</h1>
+                        <p key={i}>{post.description}</p>
+                    </div>
+                )
+            })
+            }
+        </div>
     )
-    
 }
-
