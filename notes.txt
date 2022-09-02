@@ -153,11 +153,5 @@ Notes:
 
 
 
-        Questions:
-        Pushing to github from a template not working
-        Good names for api functions that POST 
-
-        git branch to see branches
-
-        merging: 
+        
 

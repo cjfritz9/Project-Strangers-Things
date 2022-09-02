@@ -25,11 +25,11 @@ export const Posts = () => {
     }
     return (
         <div>{
-            postsList.map((post, i) => {
+            postsList.map((post) => {
                 return (
                     <div>
-                        <h1 key={i}>{post.title}</h1>
-                        <p key={i}>{post.description}</p>
+                        <h2 >{post.title}</h2>
+                        <p >{post.description}</p>
                     </div>
                 )
             })
