@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client';
-import { Header, Portal, Messages, Posts } from './components'
+import { Header, Login, Messages, Posts, Register, NewPost } from './components'
 import { BrowserRouter as Router,
     useNavigate as Navigate,
     Routes,
@@ -15,8 +15,14 @@ const App = () => {
                     <Routes>
                         {/* <Route path='/Search' element={<Search /> }></Route> */}
                     <Route exact path='/' element={<Posts />}></Route>
-                    <Route exact path='/home' element={<Posts />}></Route>
-                    <Route path ='/login_or_register' element={<Portal />}></Route>
+                    <Route path='/home' element={<Posts />}></Route>
+                    <Route path ='/login' element={
+                    localStorage.getItem('token')
+                    ? <Posts />
+                    : <Login />}>                       
+                    </Route>
+                    <Route path='/register' element={<Register />}></Route>
+                    <Route path='/create_post' element={<NewPost />}></Route>
                 </Routes>
             </div>
     )

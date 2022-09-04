@@ -13,6 +13,26 @@ export const fetchAllPosts = async () => {
     }
 }
 
+export const registerUser = async () => {
+
+    const response = await fetch(`${BASE_URL}/users/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify({ user: {
+            username: `${username}`,
+            password: `${password}`
+        }
+        })    
+    })
+    const result = await response.json()
+    console.log(success)
+    localStorage.setItem('token', result.data.token)
+    console.log(localStorage)
+    return
+}
+
 
 
 

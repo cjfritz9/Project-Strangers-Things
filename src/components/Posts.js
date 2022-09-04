@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../api";
+import {
+    Routes,
+    Route,
+    Link,
+ } from 'react-router-dom'
 
 export const Posts = () => {
     const [postsList, setPostsList] = useState([])
     const [title, setTitle] = useState([])
     const [body, setBody] = useState([])
+
 
     useEffect(() => {
         const getPosts = async() => {
@@ -23,16 +29,22 @@ export const Posts = () => {
             console.error('Error fetching post data: ', err)
         }
     }
+
+
+
     return (
-        <div>{
+        <div>
+            {
             postsList.map((post) => {
                 return (
                     <div>
                         <h2 >{post.title}</h2>
-                        <p >{post.description}</p>
+                        <span >{post.description}</span>
+                        {/* {console.log(post)} */}
                     </div>
                 )
             })
+
             }
         </div>
     )

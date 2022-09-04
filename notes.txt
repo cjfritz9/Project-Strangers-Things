@@ -151,7 +151,12 @@ Notes:
         Line 106: filter through all of our new posts and delete the one that matches the button by ID
         Line 106: filter through all of our new posts and delete the one that matches the button by ID
 
-
+    SATURDAY GOALS:
+        -FINISH THIS SO YOU GET TWO DAYS OFF :party:
+        -Login Process & Render (profile, add post): Figure out how to use local storage to show ONLY relevant data to user
+        -Logout Process: Remove token from local storage so users can't cheat the login by typing in paths manually
+        -Create Posts
+        -Messaging - Sending messages to post authors and displaying sender's name correctly
 
         
 
