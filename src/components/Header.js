@@ -1,22 +1,26 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     useNavigate,
     Routes,
     Route,
     Link,
  } from 'react-router-dom'
-import './header.css'
 
 export const Header = () => {
-    // const [hasToken, setHasToken] = (null)
+    // const [hasToken, setHasToken] = useState(null)
 
     // const tokenChecker = () => {
     //     localStorage.getItem('token') ? setHasToken(true) : setHasToken(false)
     // }
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         localStorage.removeItem('token')
     }
+
+    useEffect(() => {
+        localStorage.getItem('token')
+        // tokenChecker()
+    }, [])
 
     // tokenChecker()
     return (
@@ -26,6 +30,7 @@ export const Header = () => {
                         <Routes>
                             <Route path='/profile' element={
                                 <>
+                                    <Link to='/create_post'>New Post</Link>
                                     <Link to="/home">Home</Link>
                                     <Link to='/'>Logout</Link>
                                 </>
@@ -37,11 +42,11 @@ export const Header = () => {
                                 <>
                                     <Link to='/create_post'>New Post</Link>
                                     <Link to='/profile'>Profile</Link>
-                                    <Link to='/' onClick={() => handleLogout()}>Logout</Link>
+                                    <Link to='/' onClick={handleLogout}>Logout</Link>
                                 </>
                                 : 
                                 <>
-                                    <Link to='/login_or_register'>Login or Register</Link>
+                                    <Link to='/login'>Login or Register</Link>
                                 </>
 
                             }>
@@ -57,6 +62,13 @@ export const Header = () => {
                                 </>     
                                 : <Link to='/'>Go Back</Link>}></Route>
                             <Route path='/register' element={<Link to='/'>Go Back</Link>}></Route>
+                            <Route path='/create_post' element={
+                                <>
+                                    <Link to='/profile'>Profile</Link>
+                                    <Link to='/'>Home</Link>
+                                    <Link to='/' onClick={() => handleLogout()}>Logout</Link>
+                                </>
+                            }></Route>
                         </Routes>
                     </nav>
         </div>

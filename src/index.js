@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client';
-import { Header, Login, Messages, Posts, Register, NewPost } from './components'
+import { Header, Login, Profile, Posts, Register, NewPost } from './components'
 import { BrowserRouter as Router,
-    useNavigate as Navigate,
+    useNavigate,
     Routes,
     Route,
     Link } from 'react-router-dom'
 
 const App = () => {
+    const [hasToken, setHasToken] = useState(false)
+    const navigate = useNavigate()
+
+    const tokenChecker = () => {
+        localStorage.getItem('token') ? setHasToken(true) : setHasToken(false)
+    }
+
+    useEffect(() => {
+        localStorage.getItem('token')
+        tokenChecker()      
+    }, [])
 
     return(
             <div>
@@ -16,13 +27,10 @@ const App = () => {
                         {/* <Route path='/Search' element={<Search /> }></Route> */}
                     <Route exact path='/' element={<Posts />}></Route>
                     <Route path='/home' element={<Posts />}></Route>
-                    <Route path ='/login' element={
-                    localStorage.getItem('token')
-                    ? <Posts />
-                    : <Login />}>                       
-                    </Route>
+                    <Route path ='/login' element={<Login />}></Route>
                     <Route path='/register' element={<Register />}></Route>
                     <Route path='/create_post' element={<NewPost />}></Route>
+                    <Route path='/profile' element={<Profile />}></Route>
                 </Routes>
             </div>
     )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     useNavigate,
     Routes,
@@ -13,30 +13,36 @@ export const Login = ()  => {
     const [success, setSuccess] =  useState(null)
     const navigate = useNavigate()
 
-    const handleLogin = async (event) => {
-        event.preventDefault()
+    useEffect (() => {
+        localStorage.getItem('token')
+        ? navigate(`/home`)
+        : null
+    }, [])
 
-        const loginUser = async () => {
+        const handleLogin = async (event) => {
+            event.preventDefault()
 
-            const response = await fetch(`${BASE_URL}/users/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'Application/json'
-                },
-                body: JSON.stringify({ user: {
-                    username: `${username}`,
-                    password: `${password}`
-                }
-                })    
-            })
-            const result = await response.json()
-            console.log(result)
-            console.log(result.success)
-            await result.success === true ? setSuccess(true) : setSuccess(false)
-            localStorage.setItem('token', result.data.token)
-            // console.log(localStorage)
-            return
-        }
+            const loginUser = async () => {
+
+                const response = await fetch(`${BASE_URL}/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'Application/json'
+                    },
+                    body: JSON.stringify({ user: {
+                        username: `${username}`,
+                        password: `${password}`
+                    }
+                    })    
+                })
+                const result = await response.json()
+                console.log(result)
+                console.log(result.success)
+                await result.success === true ? setSuccess(true) : setSuccess(false)
+                localStorage.setItem('token', result.data.token)
+                // console.log(localStorage)
+                return
+            }
 
         const loginSuccessHandler = async () => {
             localStorage.getItem('token')
@@ -57,10 +63,10 @@ export const Login = ()  => {
     }
 
     return (
-        <div>
+        <div className='login-wrapper'>
             <h2>Welcome Back!</h2>
             <h3>Login</h3>
-                    <form className='loginForm' onSubmit={handleLogin}>
+                    <form className='login-form' onSubmit={handleLogin}>
                         <div className='form-user'>
                             <input placeholder='Username' id='userLogin' value={username} onChange={(e) => setUsername(e.target.value)} required/>
                         </div>

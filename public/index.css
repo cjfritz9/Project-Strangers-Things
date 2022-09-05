@@ -1,4 +1,134 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #3A5FE5;
 }
+
+#header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1E0707;
+    position: sticky;
+    top: 0px;
+    box-shadow: 0px 3px 3px #FF1515;
+    border-top: 7px double #FF1515;
+}
+
+h1{ 
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: #FF1515;
+    padding: 0px;
+    margin: 10px;
+}
+
+#links-menu > *:hover {
+    color: white;
+    background-color: #3A5FE5;
+    border: 2px solid #3A5FE5;
+}
+
+#links-menu > * {
+    color: #FF1515;
+    margin: 10px;
+    padding: 3px;
+    text-decoration: none;
+    border: 2px solid #1E193C;
+    background-color: #1E193C;
+    border-radius: 15%;
+}
+
+#new-post-form > h2 {
+    text-align: center;
+}
+
+#delivery-option {
+    font-weight: bold;
+}
+
+#delivery-checkbox {
+    margin-left: 15px;
+}
+
+#new-post-form {
+    font-family: 'Poppins', sans-serif;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;   
+}
+
+#new-post-description {
+    padding: 1px;
+    border: 1px solid black;
+    margin: 10px;
+    height: 100px;
+}
+
+#delivery-option {
+    margin-right: 90px;
+}
+
+.new-post-inputs-2 {
+    width: 165px;
+    margin: 10px;
+}
+
+.new-post-inputs {
+    width: 360px;
+    margin: 10px;
+}
+
+.post > span {
+    margin-bottom: 15px;
+}
+
+.post {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin: 25px;
+    padding: 15px;
+    background-color: #1E193C;
+    border-radius: 2%;
+    width: 500px;
+}
+
+#post-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-pass > * {
+    margin-bottom: 5px;
+}
+
+.register-pass {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form > * {
+    margin-bottom: 5px;
+}
+
+.login-wrapper {
+    text-align: center;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700;900&display=swap');

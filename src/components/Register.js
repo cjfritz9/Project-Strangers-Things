@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
     useNavigate,
     Routes,
@@ -13,6 +13,12 @@ export const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [success, setSuccess] =  useState(null)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        localStorage.getItem('token')
+        ? navigate(`/home`)
+        : null
+    })
 
     const handleRegister = async (event) => {
         event.preventDefault()
@@ -37,36 +43,40 @@ export const Register = () => {
             // console.log(localStorage)
             return
         }
-        console.log(success)
+    console.log(success)
 
-        const registerSuccessHandler = async () => {
-            localStorage.getItem('token')
-            ? navigate(`/home`)
-            : null
-        }
+    const registerSuccessHandler = async () => {
+        localStorage.getItem('token')
+        ? navigate(`/home`)
+        : null
+    }
 
-        let user = {
-            username: `${username}`,
-            password: `${password}`,
-        }
+    let user = {
+        username: `${username}`,
+        password: `${password}`,
+    }
 
+    await registerUser(user) 
         await registerUser(user) 
-        console.log(user)
-        registerSuccessHandler()
-        setUsername('')
-        setPassword('')
+    await registerUser(user) 
+    console.log(user)
+    registerSuccessHandler()
+    setUsername('')
+    setPassword('')
+    setConfirmPassword('')            
         setConfirmPassword('')            
+    setConfirmPassword('')            
     }
 
     return (
-        <div>
+        <div className='login-wrapper'>
             <h2>Welcome to Stranger's Things!</h2>
             <h3>Register</h3>
-                    <form className='registerForm' onSubmit={handleRegister}>
+                    <form className='login-form' onSubmit={handleRegister}>
                         <div className='form-user'>
                             <input placeholder='Username' id='userRegister' value={username} onChange={(e) => setUsername(e.target.value)} required/>
                         </div>
-                        <div className='form-pass'>
+                        <div className='register-pass'>
                             <input type='password' placeholder='Password' id='password' value={password} onChange={(e) => setPassword(e.target.value)} required/>
                             <input type='password' placeholder='Confirm Password' id='confirmPassword' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}  required/>
                         </div>
